@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroCode // Agricultura & Tecnologia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">&lt;AgroCode /&gt;</div>
+    <nav>
+      <a href="#posts">Posts</a>
+      <a href="#caca-palavras">Caça-Palavras</a>
+      <a href="#cruzadinha">Cruzadinha</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    <!-- Seção de Posts -->
+    <section id="posts" class="section">
+      <h2>// 01. Artigos & Publicações</h2>
+      <div class="posts-grid">
+        
+        <article class="post-card">
+          <span class="tag">História</span>
+          <h3>1. O Início da Agricultura</h3>
+          <p>Há cerca de 12.000 anos, na Revolução Neolítica, a humanidade deixou o nomadismo ao dominar o cultivo de grãos e a domesticação de animais no Crescente Fértil.</p>
+        </article>
+
+        <article class="post-card">
+          <span class="tag">Atualidade</span>
+          <h3>2. Como é a Agricultura Hoje</h3>
+          <p>Hoje, o setor opera como uma indústria de alta precisão. Sensoriamento remoto, dados via satélite e tratores autônomos impulsionam a produtividade global.</p>
+        </article>
+
+        <article class="post-card">
+          <span class="tag">Ranking</span>
+          <h3>3. Os 10 Maiores Países Agrícolas</h3>
+          <p>China, Índia, EUA e Brasil lideram a produção mundial, seguidos por Rússia, Indonésia, França, Canadá, Ucrânia e Austrália em volume e exportações.</p>
+        </article>
+
+        <article class="post-card">
+          <span class="tag">Produção</span>
+          <h3>4. Ranking de Commodities</h3>
+          <p>Os produtos mais cultivados no planeta são: 1º Cana-de-açúcar, 2º Milho, 3º Trigo, 4º Arroz, 5º Batata, 6º Soja, 7º Mandioca e 8º Tomate.</p>
+        </article>
+
+        <article class="post-card">
+          <span class="tag">Tech</span>
+          <h3>5. AgTechs e IOT no Campo</h3>
+          <p>Drones para mapeamento de pragas, sensores de umidade de solo em tempo real e automação via IA são os novos pilares do agronegócio moderno.</p>
+        </article>
+
+        <article class="post-card">
+          <span class="tag">Ecologia</span>
+          <h3>6. Agricultura Sustentável</h3>
+          <p>Técnicas como plantio direto, rotação de culturas e bioinsumos minimizam o impacto ambiental e promovem a regeneração dos solos agrícolas.</p>
+        </article>
+
+        <article class="post-card">
+          <span class="tag">Futuro</span>
+          <h3>7. Fazendas Verticais</h3>
+          <p>O cultivo em ambientes fechados com luz LED e hidroponia consome até 95% menos água e aproxima a produção de alimentos dos grandes centros urbanos.</p>
+        </article>
+
+        <article class="post-card">
+          <span class="tag">Biotecnologia</span>
+          <h3>8. Transgênicos e Genética</h3>
+          <p>A edição genômica (como CRISPR) permite desenvolver sementes mais resistentes à seca, pragas e mudanças climáticas severas.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Seção Caça-Palavras -->
+    <section id="caca-palavras" class="section">
+      <h2>// 02. Caça-Palavras Agrícola</h2>
+      <p>Encontre as 10 palavras ocultas no grid (clique nas letras para selecionar):</p>
+      <div class="word-list">
+        <span id="w-SOJA">SOJA</span>
+        <span id="w-MILHO">MILHO</span>
+        <span id="w-TRIGO">TRIGO</span>
+        <span id="w-CAFE">CAFE</span>
+        <span id="w-ARROZ">ARROZ</span>
+        <span id="w-TRATOR">TRATOR</span>
+        <span id="w-ADUBO">ADUBO</span>
+        <span id="w-ARADO">ARADO</span>
+        <span id="w-SAFRA">SAFRA</span>
+        <span id="w-HORTA">HORTA</span>
+      </div>
+      <div id="wordsearch-grid" class="grid-container"></div>
+    </section>
+
+    <!-- Seção Cruzadinha -->
+    <section id="cruzadinha" class="section">
+      <h2>// 03. Cruzadinha Tech</h2>
+      <p>Preencha as respostas corretas de acordo com as dicas abaixo:</p>
+      <div class="crossword-container">
+        <div class="clues">
+          <h3>Dicas:</h3>
+          <ol>
+            <li>Técnica de cultivar plantas na água com nutrientes (9 letras).</li>
+            <li>Maior produtor mundial de cana-de-açúcar (6 letras).</li>
+            <li>Veículo pesado usado para puxar arados e carretas (6 letras).</li>
+            <li>Período de colheita dos grãos (5 letras).</li>
+          </ol>
+        </div>
+        <div class="crossword-inputs">
+          <div class="input-group">
+            <label>1.</label> <input type="text" id="cross-1" maxlength="9" placeholder="9 letras">
+          </div>
+          <div class="input-group">
+            <label>2.</label> <input type="text" id="cross-2" maxlength="6" placeholder="6 letras">
+          </div>
+          <div class="input-group">
+            <label>3.</label> <input type="text" id="cross-3" maxlength="6" placeholder="6 letras">
+          </div>
+          <div class="input-group">
+            <label>4.</label> <input type="text" id="cross-4" maxlength="5" placeholder="5 letras">
+          </div>
+          <button onclick="verificarCruzadinha()" class="btn">Validar Respostas</button>
+          <p id="cross-result"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Quiz -->
+    <section id="quiz" class="section">
+      <h2>// 04. Quiz Agro</h2>
+      <div class="quiz-container">
+        <div class="question">
+          <p>1. Onde teve início a Revolução Neolítica da agricultura?</p>
+          <label><input type="radio" name="q1" value="a"> América do Norte</label><br>
+          <label><input type="radio" name="q1" value="b"> Crescente Fértil</label><br>
+          <label><input type="radio" name="q1" value="c"> Europa Central</label>
+        </div>
+
+        <div class="question">
+          <p>2. Qual é a cultura agrícola mais produzida no mundo em tonelagem?</p>
+          <label><input type="radio" name="q2" value="a"> Soja</label><br>
+          <label><input type="radio" name="q2" value="b"> Trigo</label><br>
+          <label><input type="radio" name="q2" value="c"> Cana-de-açúcar</label>
+        </div>
+
+        <div class="question">
+          <p>3. Qual tecnologia permite monitorar a lavoura por imagens aéreas?</p>
+          <label><input type="radio" name="q3" value="a"> Drones</label><br>
+          <label><input type="radio" name="q3" value="b"> Arado manual</label><br>
+          <label><input type="radio" name="q3" value="c"> Enxada elétrica</label>
+        </div>
+
+        <button onclick="calcularQuiz()" class="btn">Enviar Respostas</button>
+        <p id="quiz-result"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Feito com 💚 por Mirella Nogueira</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
