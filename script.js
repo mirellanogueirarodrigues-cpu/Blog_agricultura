@@ -7,13 +7,13 @@ const matrix = [
   ['S', 'A', 'F', 'R', 'A', 'O', 'A', 'M', 'P', 'R'],
   ['A', 'R', 'R', 'O', 'Z', 'S', 'T', 'K', 'L', 'A'],
   ['H', 'O', 'R', 'T', 'A', 'X', 'O', 'Y', 'Z', 'T'],
-  ['B', 'N', 'M', 'K', 'L', 'P', 'R', 'Q', 'W', 'O'],
-  ['C', 'V', 'B', 'N', 'M', 'L', 'K', 'J', 'H', 'G'],
-  ['F', 'D', 'S', 'A', 'Q', 'W', 'E', 'R', 'T', 'Y']
+  ['T', 'R', 'A', 'T', 'O', 'R', 'Q', 'W', 'E', 'R'],
+  ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
+  ['K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
 ];
 
-const targetWords = ["SOJA", "MILHO", "TRIGO", "ARADO", "ADUBO", "CAFE", "SAFRA", "ARROZ", "HORTA", "TRATOR"];
-let selectedCells = [];
+const targetWords = ["SOJA", "MILHO", "TRIGO", "CAFE", "ARROZ", "TRATOR", "ADUBO", "ARADO", "SAFRA", "HORTA"];
+let selectedSequence = "";
 let foundWords = [];
 
 function initWordSearch() {
@@ -25,32 +25,42 @@ function initWordSearch() {
       const cell = document.createElement('div');
       cell.classList.add('cell');
       cell.innerText = matrix[r][c];
-      cell.dataset.row = r;
-      cell.dataset.col = c;
-      cell.addEventListener('click', () => toggleSelectCell(cell, matrix[r][c]));
+      cell.addEventListener('click', () => selectCell(cell, matrix[r][c]));
       grid.appendChild(cell);
     }
   }
 }
 
-let currentSelection = "";
-
-function toggleSelectCell(cell, char) {
-  cell.classList.toggle('selected');
-  
-  // Lógica simples de verificação por palavra ao clicar
-  if (cell.classList.contains('selected')) {
-    currentSelection += char;
-  } else {
-    currentSelection = currentSelection.replace(char, '');
+function selectCell(cell, char) {
+  if (!cell.classList.contains('selected')) {
+    cell.classList.add('selected');
+    selectedSequence += char;
+    verificarPalavras();
   }
+}
 
+function limparSelecao() {
+  selectedSequence = "";
+  const cells = document.querySelectorAll('.cell');
+  cells.forEach(c => c.classList.remove('selected'));
+}
+
+function verificarPalavras() {
   targetWords.forEach(word => {
-    if (currentSelection.includes(word) && !foundWords.includes(word)) {
+    if (selectedSequence.includes(word) && !foundWords.includes(word)) {
       foundWords.push(word);
-      document.getElementById(`w-${word}`).classList.add('found');
+      const tag = document.getElementById(`w-${word}`);
+      if (tag) {
+        tag.classList.add('found');
+      }
     }
   });
+
+  if (foundWords.length === targetWords.length) {
+    setTimeout(() => {
+      alert("Parabéns! Você encontrou todas as 10 palavras do campo! 🌾🎉");
+    }, 200);
+  }
 }
 
 // --- CRUZADINHA ---
@@ -69,11 +79,11 @@ function verificarCruzadinha() {
 
   const result = document.getElementById('cross-result');
   if (acertos === 4) {
-    result.style.color = '#10b981';
-    result.innerText = "Excelente! Você acertou todas as palavras!";
+    result.style.color = '#4a7c59';
+    result.innerText = "✨ Incrível! Você gabaritou a cruzadinha!";
   } else {
-    result.style.color = '#ef4444';
-    result.innerText = `Você acertou ${acertos} de 4 palavras. Tente novamente!`;
+    result.style.color = '#d96b43';
+    result.innerText = `Você acertou ${acertos} de 4 palavras. Dê mais uma olhadinha nas dicas!`;
   }
 }
 
@@ -83,18 +93,29 @@ function calcularQuiz() {
   const q2 = document.querySelector('input[name="q2"]:checked');
   const q3 = document.querySelector('input[name="q3"]:checked');
 
-  let score = 0;
+  if (!q1 || !q2 || !q3) {
+    const result = document.getElementById('quiz-result');
+    result.style.color = '#d96b43';
+    result.innerText = "Por favor, responda todas as 3 perguntas antes de enviar!";
+    return;
+  }
 
-  if (q1 && q1.value === 'b') score++;
-  if (q2 && q2.value === 'c') score++;
-  if (q3 && q3.value === 'a') score++;
+  let score = 0;
+  if (q1.value === 'b') score++;
+  if (q2.value === 'c') score++;
+  if (q3.value === 'a') score++;
 
   const result = document.getElementById('quiz-result');
-  result.style.color = score === 3 ? '#10b981' : '#f59e0b';
-  result.innerText = `Sua pontuação: ${score} de 3 perguntas corretas.`;
+  if (score === 3) {
+    result.style.color = '#4a7c59';
+    result.innerText = "🌟 Sensacional! 3/3 acertos! Você sabe tudo de agricultura!";
+  } else {
+    result.style.color = '#d96b43';
+    result.innerText = `Você acertou ${score} de 3 perguntas. Continue explorando o blog!`;
+  }
 }
 
-// Inicializar na carga da página
+// Inicializar na carga do documento
 window.onload = () => {
   initWordSearch();
 };
